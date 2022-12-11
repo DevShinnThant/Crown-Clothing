@@ -2,6 +2,7 @@ import {initializeApp} from 'firebase/app';
 
 import {getAuth,GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
 
+import {getFirestore,doc,getDoc,setDoc} from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZpyDpg6N4p2YKt-0UMTThT1xXajtJUaw",
@@ -23,5 +24,28 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 
+export const db = getFirestore();
+
 export const signInWithGooglePopUp = async () => await signInWithPopup(auth,provider);
 
+export const createUserDocumentFromAuth = async (userAuth) => {
+  const docRef = doc(db,'users',userAuth.uid);
+
+  const docSnapShot = await getDoc(docRef);
+
+
+  if(!docSnapShot.exists())
+  {
+  const {displayName,email} = userAuth;
+  const createdAt = new Date();
+    try{
+      await setDoc(docRef,{
+         displayName,
+         email,
+         createdAt
+      })
+    }catch(err){
+      console.log(err.message)
+    }
+  }
+}
