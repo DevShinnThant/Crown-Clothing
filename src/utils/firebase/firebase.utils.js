@@ -29,10 +29,10 @@ export const db = getFirestore();
 export const signInWithGooglePopUp = async () => await signInWithPopup(auth,provider);
 
 export const createAuthUserWithEmailAndPassword = async (email,password) => {
-  await createUserWithEmailAndPassword(auth,email,password);
+ return await createUserWithEmailAndPassword(auth,email,password);
 };
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth,additionalInformation={}) => {
   const docRef = doc(db,'users',userAuth.uid);
 
   const docSnapShot = await getDoc(docRef);
@@ -46,7 +46,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(docRef,{
          displayName,
          email,
-         createdAt
+         createdAt,
+         ...additionalInformation
       })
     }catch(err){
       console.log(err.message)
