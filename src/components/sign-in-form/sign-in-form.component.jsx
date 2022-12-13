@@ -15,9 +15,10 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  console.log('render')
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {email,password} = formFields;
-
+    
     const {setCurrentUser} = useContext(UserContext);
 
     const resetFormField = () => {
@@ -46,7 +47,7 @@ const SignInForm = () => {
       const {name,value} = e.target;
       setFormFields({...formFields,[name]:value})
     };
-
+    
     return (
         <div className="sign-in-container">
         <h2>Already have an account?</h2>
