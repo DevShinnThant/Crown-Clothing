@@ -20,7 +20,7 @@ const SignUpForm = () => {
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {displayName,email,password,confirmPassword} = formFields;
 
-    const {setCurrentUser} = useContext(UserContext);
+    const {setCurrentUser,currentUser} = useContext(UserContext);
 
     const resetFormField = () => {
       setFormFields(defaultFormFields);
@@ -65,7 +65,9 @@ const SignUpForm = () => {
 
           <FormInput label='Confirm Password' type='password' name='confirmPassword' value={confirmPassword} onChange={onChangeHandler}/>
 
-          <Button type="submit">Sign Up</Button>
+          {
+            currentUser ? (<Button disabled type="submit">Sign Up</Button>) : (<Button type="submit">Sign Up</Button>)
+          }          
         </form>
         </div>
     )
