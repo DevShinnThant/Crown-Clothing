@@ -1,6 +1,6 @@
 import {initializeApp} from 'firebase/app';
 
-import {signOut,getAuth,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
+import {onAuthStateChanged,signOut,getAuth,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
 
 import {getFirestore,doc,getDoc,setDoc} from 'firebase/firestore';
 
@@ -62,4 +62,6 @@ export const createUserDocumentFromAuth = async (userAuth,additionalInformation=
       console.log(err.message)
     }
   }
-}
+};
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);

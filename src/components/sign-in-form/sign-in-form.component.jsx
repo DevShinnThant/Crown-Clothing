@@ -19,27 +19,29 @@ const SignInForm = () => {
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {email,password} = formFields;
     
-    const {setCurrentUser} = useContext(UserContext);
 
     const resetFormField = () => {
       setFormFields(defaultFormFields);
     };
 
     const signInWithGoogleHandler = async () => {
-      const {user} = await signInWithGooglePopUp();
-      setCurrentUser(user);
-      await createUserDocumentFromAuth(user);
+      await signInWithGooglePopUp();
     }
 
     const onSubmitHandler = async (e) => {
      e.preventDefault();
 
      try{
-      const {user} = await signInAuthUserWithEmailAndPassword(email,password);
-      setCurrentUser(user);
+      await signInAuthUserWithEmailAndPassword(email,password);
       resetFormField();
      }catch(err){
-       console.log(err.message);
+       switch (err.code) {
+         case 'auth/user-not-found' : alert('user has not found');
+         break;
+         case 'auth/wrong-password' : alert('incorrect password');
+         break;
+         default : console.log(err.message);
+       }
     }
     };
 

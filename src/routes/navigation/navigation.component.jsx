@@ -12,12 +12,10 @@ import './navigation.styles.scss';
 
 
 const Navigation = () => {
-  const {currentUser,setCurrentUser} = useContext(UserContext);
+  const {currentUser} = useContext(UserContext);
 
   const singOutHandler = async () => {
-    console.log('hit');
     await signOutUser();
-    setCurrentUser(null);
   }
 
   return (
