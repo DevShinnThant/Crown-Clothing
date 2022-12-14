@@ -10,6 +10,7 @@ import {ReactComponent as CrownSvg} from '../../assets/crown.svg';
 
 import './navigation.styles.scss';
 import CartIcon from "../../components/cart-icon/cart-icon.component.jsx";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component.jsx";
 
 
 const Navigation = () => {
@@ -32,6 +33,7 @@ const Navigation = () => {
          }
          <CartIcon/>
         </div>
+        <CartDropdown/>
       </div>
       <Outlet/>
     </Fragment>
