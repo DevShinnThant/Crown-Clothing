@@ -1,9 +1,11 @@
 import { useContext } from "react";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 import {CartContext} from '../../contexts/cart.context';
 
 const Checkout = () => {
     const {cartItems} = useContext(CartContext);
+
     return  (
         <div>
           <h2>Checkout</h2>
@@ -11,10 +13,7 @@ const Checkout = () => {
           {
             cartItems.map((item)=>{
                 return (
-                    <div>
-                      <h2>{item.name}</h2>
-                      <span>increase</span>
-                    </div>
+                  <CheckoutItem key={item.id} item={item}/>
                 )
             })
           }
