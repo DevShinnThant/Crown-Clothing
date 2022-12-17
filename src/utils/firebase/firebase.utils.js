@@ -2,7 +2,7 @@ import {initializeApp} from 'firebase/app';
 
 import {onAuthStateChanged,signOut,getAuth,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
 
-import {getFirestore,doc,getDoc,setDoc,collection,writeBatch} from 'firebase/firestore';
+import {getFirestore,doc,getDoc,setDoc,collection,writeBatch,query,getDocs} from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZpyDpg6N4p2YKt-0UMTThT1xXajtJUaw",
@@ -75,6 +75,21 @@ export const addCollectionAndDocuments = async (collectionName,objectsToAdd) => 
 
   await batch.commit();
   console.log('done');
+};
+
+export const getCollectionAndDocuments =  async () => {
+  const collectionRef = collection(db,'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const categories = querySnapshot.docs.reduce((acc,docSnapshot)=>{
+    const {title,items}  = docSnapshot.data();
+    acc[title] = items;
+    return acc;
+  },{});
+
+  return categories;
 }
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);
