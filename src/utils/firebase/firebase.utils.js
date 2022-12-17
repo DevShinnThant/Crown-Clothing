@@ -85,7 +85,7 @@ export const getCollectionAndDocuments =  async () => {
 
   const categories = querySnapshot.docs.reduce((acc,docSnapshot)=>{
     const {title,items}  = docSnapshot.data();
-    acc[title] = items;
+    acc[title.toLowerCase()] = items;
     return acc;
   },{});
 
