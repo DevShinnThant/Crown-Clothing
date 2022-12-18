@@ -1,4 +1,14 @@
-.directory-item-container {
+import styled from "styled-components";
+
+export const BackgroundImage = styled.div`
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-image: ${({imageUrl})=> `url(${imageUrl})`};
+`
+
+export const DirectoryItemContainer = styled.div`
     min-width: 30%;
     height: 240px;
     flex: 1 1 auto;
@@ -12,7 +22,7 @@
     &:hover {
       cursor: pointer;
   
-      & .background-image {
+      & ${BackgroundImage} {
         transform: scale(1.1);
         transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
       }
@@ -20,28 +30,17 @@
       & .body{
         opacity: 0.9;
       }
-    }
-  
-    &.large {
-      height: 380px;
-    }
-  
-    &:first-child {
+
+      &:first-child {
       margin-right: 7.5px;
-    }
+      }
   
-    &:last-child {
-      margin-left: 7.5px;
+      &:last-child {
+        margin-left: 7.5px;
+      }
     }
-  
-    .background-image {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-    }
-  
-    .body {
+` 
+export const Body = styled.div`
       height: 90px;
       padding: 0 25px;
       display: flex;
@@ -64,6 +63,4 @@
         font-weight: lighter;
         font-size: 16px;
       }
-    }
-  }
-  
+`

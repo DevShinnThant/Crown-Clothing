@@ -13,7 +13,6 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
-  console.log('render')
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {email,password} = formFields;
     
