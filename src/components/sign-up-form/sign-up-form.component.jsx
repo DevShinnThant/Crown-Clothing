@@ -1,5 +1,3 @@
-import './sign-up-form.styles.scss';
-
 import { useState,useContext } from "react";
 
 import { UserContext } from '../../contexts/user.context';
@@ -8,6 +6,7 @@ import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "
 
 import Button,{BUTTON_TYPES} from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+import { AuthContainer } from '../sign-in-form/sign-in-form.styles';
 
 const defaultFormFields = {
     displayName : '',
@@ -52,7 +51,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <div className='sign-up-container'>
+        <AuthContainer>
         <h2>Don't have an account?</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={onSubmitHandler}>
@@ -69,7 +68,7 @@ const SignUpForm = () => {
             currentUser ? (<Button disabled type="submit">Sign Up</Button>) : (<Button type="submit">Sign Up</Button>)
           }          
         </form>
-        </div>
+        </AuthContainer>
     )
 }
 export default SignUpForm;
