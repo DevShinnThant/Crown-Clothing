@@ -1,5 +1,7 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 
+import { createAction } from "../utils/firebase/reducer/reducer.utils";
+
 export const CartContext = createContext({
   isCartOpen:false,
   toggleCartOpen: () => null,
@@ -81,14 +83,13 @@ export const CartProvider = ({children}) => {
     
       const cartTotal = cartItems.reduce((total,cartItem)=> total+ (cartItem.price * cartItem.quantity),0);
        
-      dispatch({
-        type: CART_ACTION_TYPES.SET_CART_ITEMS,
-        payload:{
+      dispatch(
+        createAction(CART_ACTION_TYPES.SET_CART_ITEMS,{
           cartItems,
           cartCount,
           cartTotal
-        }
-      })
+        })
+        )
     }
 
     const addItemToCart = (productToAdd) => {
@@ -107,7 +108,7 @@ export const CartProvider = ({children}) => {
     };
 
     const toggleCartOpen = () => {
-      dispatch({type:CART_ACTION_TYPES.TOGGLE_CART_OPEN})
+      dispatch(createAction(CART_ACTION_TYPES.TOGGLE_CART_OPEN))
     };
     
     const value = {isCartOpen,toggleCartOpen,cartItems,addItemToCart,cartCount,removeItemFromCart,clearItemFromCart,cartTotal};
