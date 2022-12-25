@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "../../store/user/user.action";
-import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
@@ -20,10 +17,6 @@ const SignUpForm = () => {
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {displayName,email,password,confirmPassword} = formFields;
 
-    const dispatch = useDispatch();
-
-    const currentUser = useSelector(selectCurrentUser);
-
     const resetFormField = () => {
       setFormFields(defaultFormFields);
     };
@@ -39,7 +32,6 @@ const SignUpForm = () => {
      try{
       const {user} = await createAuthUserWithEmailAndPassword(email,password);
       await createUserDocumentFromAuth(user,{displayName});
-      dispatch(setCurrentUser(user));
       resetFormField();
      }catch(err){
         if(err.code === 'auth/email-already-in-use'){
@@ -67,9 +59,7 @@ const SignUpForm = () => {
 
           <FormInput label='Confirm Password' type='password' name='confirmPassword' value={confirmPassword} onChange={onChangeHandler}/>
 
-          {
-            currentUser ? (<Button disabled type="submit">Sign Up</Button>) : (<Button type="submit">Sign Up</Button>)
-          }          
+          <Button type="submit">Sign Up</Button>        
         </form>
         </AuthContainer>
     )
