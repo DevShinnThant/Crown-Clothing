@@ -8,7 +8,6 @@ import { selectCategoriesMap } from "../../store/categories/categories.selector"
 import { CategoryContainer, CategoryTitle } from "./category.styles";
 
 const Category = () => {
-   console.log('category render')
     const categoriesMap = useSelector(selectCategoriesMap);
    
     const {category} = useParams();
@@ -19,8 +18,6 @@ const Category = () => {
        setProducts(categoriesMap[category]);
     },[category,categoriesMap])
  
-    console.log(products);
-
     return (
         <Fragment>
          <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
