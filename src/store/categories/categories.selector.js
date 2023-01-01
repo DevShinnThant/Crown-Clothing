@@ -20,7 +20,6 @@ export const selectCategoriesMap = createSelector(
 export const selectLoading = createSelector(
   [selectCategoryReducer],
   (categories) => {
-    console.log(categories);
     return categories.loading
   }
 )
