@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { googleSignInStart } from "../../store/user/user.action.js";
+import { emailSignInStart, googleSignInStart } from "../../store/user/user.action.js";
 
 import {signInWithGooglePopUp,signInAuthUserWithEmailAndPassword,createUserDocumentFromAuth} from '../../utils/firebase/firebase.utils.js'
 
@@ -32,7 +32,7 @@ const SignInForm = () => {
      e.preventDefault();
 
      try{
-      await signInAuthUserWithEmailAndPassword(email,password);
+      dispatch(emailSignInStart(email,password));
       resetFormField();
      }catch(err){
        switch (err.code) {
