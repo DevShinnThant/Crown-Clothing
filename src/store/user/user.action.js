@@ -10,3 +10,9 @@ export const signInFailed = (error) => createAction(USER_ACTION_TYPES.SIGN_IN_FA
 export const googleSignInStart = () => createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
 
 export const emailSignInStart = (email,password) => createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START,{email,password})
+
+export const signUpStart = (displayName,email,password) => createAction(USER_ACTION_TYPES.SIGN_UP_START,{displayName,email,password});
+
+export const signUpSuccess = (user) => createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS,user);
+
+export const signUpFailed = (error) => createAction(USER_ACTION_TYPES.SIGN_UP_FAILED,error);
