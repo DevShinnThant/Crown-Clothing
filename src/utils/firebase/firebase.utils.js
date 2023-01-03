@@ -46,7 +46,6 @@ export const createUserDocumentFromAuth = async (userAuth,additionalInformation=
 
   const docSnapShot = await getDoc(docRef);
 
-
   if(!docSnapShot.exists())
   {
   const {displayName,email} = userAuth;
@@ -62,6 +61,7 @@ export const createUserDocumentFromAuth = async (userAuth,additionalInformation=
       console.log(err.message)
     }
   }
+  return docSnapShot;
 };
 
 export const addCollectionAndDocuments = async (collectionName,objectsToAdd) => {
@@ -90,7 +90,7 @@ export const getCollectionAndDocuments =  async () => {
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);
 
-export const getCurrentUser = async () => {
+export const getCurrentUser = () => {
   return new Promise((resolve,reject) => {
     const unsubscribe = onAuthStateChanged(auth,
     (userAuth) => {
