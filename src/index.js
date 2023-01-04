@@ -12,7 +12,7 @@ import {persistor, store} from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { stripePromise } from './utils/firebase/stripe/stripe';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +20,7 @@ root.render(
     <Provider store={store}>
     <PersistGate loading="null" persistor={persistor}>
       <BrowserRouter>
-        <Elements stripe={loadStripe}>
+        <Elements stripe={stripePromise}>
           <App />
         </Elements>
       </BrowserRouter>
