@@ -5,4 +5,4 @@ export const AuthenticationContainer = styled.div`
   justify-content: space-between;
   margin: 30px auto;
   width: 800px;
-`
+`;
