@@ -3,18 +3,39 @@ import Button, { BUTTON_TYPES } from "../button/button.component";
 import { FormContainer, PaymentFormContainer } from "./payment-form.styles";
 
 const PaymentForm = () => {
-  const onSubmitHandler = async (e) => {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const paymentHandler = async (e) => {
     e.preventDefault();
-    alert("hit");
+
+    if (!stripe || !elements) return;
+
+    try {
+      const response = await fetch(
+        "/.netlify/functions/create-payment-intent.js",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount: 1000 }),
+        }
+      ).then((res) => {
+        return res.json();
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <PaymentFormContainer>
-      <FormContainer>
+      <FormContainer onSubmit={paymentHandler}>
         <CardElement />
-        <Button onSubmit={onSubmitHandler} buttonType={BUTTON_TYPES.inverted}>
-          Pay Now
-        </Button>
+        <Button buttonType={BUTTON_TYPES.inverted}>Pay Now</Button>
       </FormContainer>
     </PaymentFormContainer>
   );
