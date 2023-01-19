@@ -13,7 +13,7 @@ const PaymentForm = () => {
 
     try {
       const response = await fetch(
-        "/.netlify/functions/create-payment-intent.js",
+        "/.netlify/functions/create-payment-intent",
         {
           method: "post",
           headers: {
