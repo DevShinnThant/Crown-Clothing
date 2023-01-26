@@ -5,6 +5,11 @@ import {
 } from "../../utils/firebase/reducer/reducer.utils";
 import { CATEGORIES_ACTION_TYPES, Category } from "./categories.types";
 
+export type CategoryAction =
+  | FetchCategoriesStart
+  | FetchCategorySuccess
+  | FetchCategoriesFailed;
+
 export type FetchCategoriesStart =
   Action<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START>;
 
