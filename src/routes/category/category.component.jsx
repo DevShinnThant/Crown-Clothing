@@ -7,7 +7,7 @@ import ProductCard from "../../components/product-card/product-card.component";
 import {
   selectCategoriesMap,
   selectLoading,
-} from "../../store/categories/categories.selector";
+} from "../../store/categories/categories.selector.ts";
 
 import { CategoryContainer, CategoryTitle } from "./category.styles";
 
