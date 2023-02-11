@@ -2,6 +2,7 @@ import {
   Action,
   ActionWithPayload,
   createAction,
+  withMatcher,
 } from "../../utils/firebase/reducer/reducer.utils";
 import { CATEGORIES_ACTION_TYPES, Category } from "./categories.types";
 
@@ -23,13 +24,15 @@ export type FetchCategoriesFailed = ActionWithPayload<
   Error
 >;
 
-export const fetchCategoriesStart = (): FetchCategoriesStart =>
-  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
+export const fetchCategoriesStart = withMatcher(() =>
+  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START)
+);
 
-export const fetchCategoriesSuccess = (
-  categories: Category[]
-): FetchCategorySuccess =>
-  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categories);
+export const fetchCategoriesSuccess = withMatcher((categories: Category[]) =>
+  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categories)
+);
 
-export const fetchCategoriesFailed = (error: Error): FetchCategoriesFailed =>
-  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
+export const fetchCategoriesFailed = withMatcher(
+  (error: Error): FetchCategoriesFailed =>
+    createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error)
+);
